@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Task</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Task</h2>
+        <form th:action="@{/tasks/update/{id}(id=${task.id})}" th:object="${task}" method="post">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" id="title" th:field="*{title}" placeholder="Enter task title">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" id="description" th:field="*{description}" placeholder="Enter task description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="employee">Assign to:</label>
+                <select class="form-control" id="employee" th:field="*{employee.id}">
+                    <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.name}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a class="btn btn-secondary" href="/tasks">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
